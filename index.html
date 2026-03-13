@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutoring Youtoring — Math & Physics Tutoring</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #16161f;
+      --border: #22222e;
+      --text: #e8e8f0;
+      --muted: #7a7a94;
+      --accent: #7c6fff;
+      --accent2: #a78bfa;
+      --accent-glow: rgba(124, 111, 255, 0.15);
+      --green: #34d399;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 64px;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--accent2); }
+    nav a.cta-nav {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.45rem 1.1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    nav a.cta-nav:hover { background: var(--accent2); }
+
+    /* SECTIONS */
+    section { padding: 6rem 1.5rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 3rem;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 0%, rgba(124,111,255,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 60%, rgba(167,139,250,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-glow);
+      border: 1px solid rgba(124,111,255,0.3);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent2);
+      margin-bottom: 2rem;
+    }
+    .hero-badge::before { content: '✦'; font-size: 0.6rem; }
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+    h1 .brand { color: var(--accent2); }
+    .hero-sub {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+    .cta-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 24px rgba(124,111,255,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--accent2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 32px rgba(124,111,255,0.4);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); background: var(--accent-glow); }
+
+    /* SUBJECTS */
+    #subjects { background: var(--bg2); }
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .subject-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .subject-card:hover {
+      border-color: rgba(124,111,255,0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(124,111,255,0.08);
+    }
+    .subject-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+    .subject-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    .subject-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .subject-list li {
+      background: rgba(124,111,255,0.08);
+      border: 1px solid rgba(124,111,255,0.15);
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.8rem;
+      color: var(--accent2);
+    }
+
+    /* HOW IT WORKS */
+    #how {
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+    #how::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 100% 50%, rgba(124,111,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2rem;
+      position: relative;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .step-num {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(124,111,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent2);
+      flex-shrink: 0;
+    }
+    .step h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .step p { color: var(--muted); font-size: 0.95rem; }
+
+    /* PRICING */
+    #pricing { background: var(--bg2); }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .pricing-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+    .pricing-card.featured {
+      border-color: rgba(124,111,255,0.5);
+      background: linear-gradient(135deg, var(--bg3), rgba(124,111,255,0.05));
+      position: relative;
+    }
+    .featured-badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+    }
+    .pricing-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .price {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+    .price-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .price-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .price-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .price-features li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .guarantee {
+      background: rgba(52, 211, 153, 0.06);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--green);
+      font-size: 0.95rem;
+    }
+    .guarantee-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+    /* ABOUT */
+    #about { background: var(--bg); }
+    .about-card {
+      max-width: 680px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+    .about-card p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      line-height: 1.75;
+    }
+    .about-card p:last-child { margin-bottom: 0; }
+    .about-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-num {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: -0.03em;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); }
+
+    /* BOOKING */
+    #booking {
+      background: var(--bg2);
+      text-align: center;
+    }
+    #booking .container { max-width: 640px; }
+    .booking-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+    }
+    .booking-desc {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+    .payment-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 1.25rem;
+    }
+
+    /* BOOKING FORM */
+    #booking-form {
+      text-align: left;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .form-group:last-of-type { margin-bottom: 1.5rem; }
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.65rem 0.9rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted); }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(124,111,255,0.15);
+    }
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7a94' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+    .form-group select option { background: var(--bg3); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+    .radio-option input[type="radio"] {
+      width: auto;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    #booking-form .btn-primary {
+      width: 100%;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    #booking-success {
+      display: none;
+      background: rgba(52, 211, 153, 0.06);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: var(--radius);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: var(--green);
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+    #booking-success .success-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    footer p { color: var(--muted); font-size: 0.85rem; }
+    footer strong { color: var(--accent2); font-weight: 600; }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      section { padding: 4rem 1rem; }
+      .subjects-grid, .pricing-grid { grid-template-columns: 1fr; }
+      .about-stats { gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-brand">Tutoring<span>Youtoring</span></a>
+    <a href="#booking" class="cta-nav">Book a Session</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">Math &amp; Physics · Python · Engineering</div>
+        <h1>
+          <span class="brand">Tutoring<br/>Youtoring</span>
+        </h1>
+        <p class="hero-sub">Math &amp; Physics tutoring that actually makes sense. No handwaving — just clear explanations, real examples, and concepts that stick.</p>
+        <div class="cta-group">
+          <a href="#booking" class="btn-primary">Book a Session</a>
+          <a href="#subjects" class="btn-secondary">See Subjects →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBJECTS -->
+  <section id="subjects">
+    <div class="container">
+      <div class="section-label">Subjects</div>
+      <h2>What I teach</h2>
+      <p class="section-desc">From algebra basics to vector calculus, high school physics to circuits — all levels covered.</p>
+      <div class="subjects-grid">
+
+        <div class="subject-card">
+          <span class="subject-icon">∑</span>
+          <h3>Mathematics</h3>
+          <ul class="subject-list">
+            <li>Algebra 1 &amp; 2</li>
+            <li>Geometry</li>
+            <li>Precalculus</li>
+            <li>Trigonometry</li>
+            <li>Calculus 1 &amp; 2</li>
+            <li>Vector Calculus</li>
+            <li>SAT / ACT Math</li>
+          </ul>
+        </div>
+
+        <div class="subject-card">
+          <span class="subject-icon">⚡</span>
+          <h3>Physics</h3>
+          <ul class="subject-list">
+            <li>High School Physics</li>
+            <li>AP Physics 1 &amp; 2</li>
+            <li>Statics</li>
+            <li>Circuits</li>
+          </ul>
+        </div>
+
+        <div class="subject-card">
+          <span class="subject-icon">⌨</span>
+          <h3>Other</h3>
+          <ul class="subject-list">
+            <li>Python Programming</li>
+            <li>Engineering Math</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <div class="section-label">Process</div>
+      <h2>How it works</h2>
+      <p class="section-desc">Three steps from confused to confident.</p>
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <h3>Book a session</h3>
+            <p>Fill out the form below with your subject, preferred time, and what's giving you trouble. I'll email you within a few hours to confirm.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <h3>Meet on Google Meet</h3>
+            <p>We work through the material together using a shared whiteboard. I explain, you ask questions — back and forth until it clicks.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <h3>Master the material</h3>
+            <p>Walk away with a clear mental model, not just the answer to one problem. Leave knowing how to tackle the next ten like it.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-label">Pricing</div>
+      <h2>Simple, fair rates</h2>
+      <p class="section-desc">No packages to buy, no subscriptions. Pay per session.</p>
+      <div class="pricing-grid">
+
+        <div class="pricing-card featured">
+          <div class="featured-badge">Most Popular</div>
+          <h3>1-Hour Session</h3>
+          <div class="price">$30</div>
+          <div class="price-desc">Full working session</div>
+          <ul class="price-features">
+            <li>Work through problems together</li>
+            <li>Concept explanations &amp; examples</li>
+            <li>Homework or exam prep</li>
+            <li>Recording available on request</li>
+          </ul>
+        </div>
+
+        <div class="pricing-card">
+          <h3>30-Min Quick Help</h3>
+          <div class="price">$15</div>
+          <div class="price-desc">Stuck on one thing</div>
+          <ul class="price-features">
+            <li>Targeted problem solving</li>
+            <li>Quick concept clarification</li>
+            <li>Great for one-off questions</li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="guarantee">
+        <span class="guarantee-icon">🛡</span>
+        <span><strong>First session satisfaction guaranteed.</strong> If it wasn't helpful, don't pay. Simple as that.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">About</div>
+      <h2>Who I am</h2>
+      <div class="about-card">
+        <p>Experienced tutor with a systems engineering background. I ran a tutoring company in college and have worked with students from middle school through university level.</p>
+        <p>I'm patient with fundamentals and rigorous with advanced topics. My approach: break complex concepts into pieces that actually make sense, build intuition before formulas, and make sure you understand <em>why</em> — not just how.</p>
+        <p>Most students I work with go from dreading a subject to actually finding it interesting. That's the goal.</p>
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-num">5+</span>
+            <span class="stat-label">Years tutoring</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">$30</span>
+            <span class="stat-label">Per hour</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Subjects covered</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <div class="container">
+      <div class="section-label">Get Started</div>
+      <h2 class="booking-title">Ready to get unstuck?</h2>
+      <p class="booking-desc">Fill out the form and I'll email you to confirm your session.</p>
+
+      <form id="booking-form" action="https://formspree.io/f/FORM_ID" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Select a subject…</option>
+            <option value="Math">Math</option>
+            <option value="Physics">Physics</option>
+            <option value="Python">Python</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Session Type</label>
+          <div class="radio-group">
+            <label class="radio-option">
+              <input type="radio" name="session_type" value="1 Hour - $30" required />
+              1 Hour — $30
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="session_type" value="30 Minutes - $15" />
+              30 Minutes — $15
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="datetime">Preferred Date &amp; Time</label>
+          <input type="text" id="datetime" name="preferred_datetime" placeholder="e.g. Monday 3pm EST" />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Anything else? <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+          <textarea id="message" name="message" placeholder="What topic are you working on? What's giving you trouble?"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">Request a Session →</button>
+      </form>
+
+      <div id="booking-success">
+        <span class="success-icon">✓</span>
+        Thanks! I'll email you within a few hours to confirm your session.
+      </div>
+
+      <p class="payment-note">Sessions on Google Meet · Payment via Venmo or CashApp after your session</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Tutoring Youtoring</strong> · Math, Physics &amp; More · © 2026</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('booking-form');
+    const success = document.getElementById('booking-success');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (response.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        alert('Something went wrong. Please try again or email me directly.');
+      }
+    });
+  </script>
+
+</body>
+</html>
